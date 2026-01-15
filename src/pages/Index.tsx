@@ -173,76 +173,80 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-lg">S</span>
-            </div>
-            <h1 className="text-xl font-heading font-bold">Snus Store</h1>
+    <div className="min-h-screen bg-gray-50 pb-20">
+      <div className="relative w-full h-32 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-white tracking-tight">VELO</h1>
+            <button className="flex items-center gap-2 text-white text-sm">
+              <Icon name="X" size={16} />
+              Закрыть
+            </button>
           </div>
-
-          <div className="flex-1 max-w-md mx-8">
-            <div className="relative">
-              <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
-              <Input
-                type="search"
-                placeholder="Поиск товаров..."
-                className="pl-10"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative">
-              <Icon name="ShoppingCart" size={20} />
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
-                0
-              </span>
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Icon name="User" size={20} />
-            </Button>
+          <div className="flex gap-2">
+            <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=80&h=80&fit=crop" alt="Velo" className="w-12 h-12 rounded-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop" alt="Velo" className="w-12 h-12 rounded-full object-cover" />
           </div>
         </div>
-      </header>
+        <div className="absolute left-4 bottom-3">
+          <span className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">
+            СКИДКА 10%
+          </span>
+        </div>
+      </div>
 
-      <main className="container py-8">
-        <div className="flex gap-4 mb-8 overflow-x-auto pb-2">
-          <Button
-            variant={selectedCategory === 'all' ? 'default' : 'outline'}
-            onClick={() => setSelectedCategory('all')}
-            className="whitespace-nowrap"
-          >
-            Все товары
-          </Button>
-          <Button
-            variant={selectedCategory === 'light' ? 'default' : 'outline'}
-            onClick={() => setSelectedCategory('light')}
-            className="whitespace-nowrap"
-          >
-            Легкие
-          </Button>
-          <Button
-            variant={selectedCategory === 'medium' ? 'default' : 'outline'}
-            onClick={() => setSelectedCategory('medium')}
-            className="whitespace-nowrap"
-          >
-            Средние
-          </Button>
-          <Button
-            variant={selectedCategory === 'strong' ? 'default' : 'outline'}
-            onClick={() => setSelectedCategory('strong')}
-            className="whitespace-nowrap"
-          >
-            Крепкие
-          </Button>
+      <div className="bg-white sticky top-0 z-40 shadow-sm">
+        <div className="flex gap-6 px-4 py-3 border-b border-gray-100 overflow-x-auto">
+          <button className="text-base font-bold text-black whitespace-nowrap border-b-2 border-black pb-1">
+            Главная
+          </button>
+          <button className="text-base text-gray-400 whitespace-nowrap">
+            Бренды
+          </button>
+          <button className="text-base text-gray-400 whitespace-nowrap">
+            Ватки
+          </button>
+          <button className="text-base text-gray-400 whitespace-nowrap">
+            Импорт
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="px-4 py-3">
+          <div className="relative">
+            <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Input
+              type="search"
+              placeholder="Быстрый поиск..."
+              className="pl-10 bg-gray-50 border-0 rounded-lg"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 px-4 pb-3">
+          <button className="p-2 border border-gray-300 rounded-lg">
+            <Icon name="SlidersHorizontal" size={20} />
+          </button>
+          <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium">
+            Бренды
+            <Icon name="ChevronDown" size={16} />
+          </button>
+          <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium">
+            Крепость
+            <Icon name="ChevronDown" size={16} />
+          </button>
+          <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium">
+            Формат
+            <Icon name="ChevronDown" size={16} />
+          </button>
+        </div>
+      </div>
+
+      <main className="px-4 py-6">
+        <h2 className="text-2xl font-bold text-center mb-6">НОВЫЕ ПРОДУКТЫ</h2>
+
+        <div className="grid grid-cols-2 gap-4">
           {filteredProducts.map((product, index) => {
             const selectedPackIndex = getSelectedPack(product.id);
             const currentPack = product.packSizes[selectedPackIndex];
@@ -250,59 +254,53 @@ const Index = () => {
             return (
               <div
                 key={product.id}
-                className="group bg-white border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 animate-fade-in"
+                className="bg-white rounded-2xl overflow-hidden shadow-sm animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="relative aspect-square overflow-hidden bg-white p-4">
+                <div className="relative aspect-square bg-gray-50 p-6 flex items-center justify-center">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain rounded-full"
                   />
                 </div>
 
-                <div className="p-4 space-y-3 border-t border-gray-100">
-                  <div>
-                    <a href="#" className="text-xs text-gray-500 hover:text-primary transition-colors">
-                      {product.brand}
-                    </a>
-                    <h3 className="font-medium text-base leading-snug mt-1 hover:text-primary transition-colors cursor-pointer">
-                      {product.name}
-                    </h3>
+                <div className="p-3 space-y-2">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">
+                    {product.brand} NICOTINE POUCHES
+                  </p>
+                  <h3 className="font-bold text-sm leading-tight">
+                    {product.name}
+                  </h3>
+
+                  <p className="text-xl font-bold">
+                    {currentPack.price.toLocaleString()} ₽
+                  </p>
+
+                  <div className="flex gap-1.5 flex-wrap">
+                    {product.packSizes.map((pack, packIndex) => (
+                      <button
+                        key={packIndex}
+                        onClick={() => setSelectedPack(product.id, packIndex)}
+                        className={`px-2.5 py-1 text-xs font-medium rounded-full transition-colors ${
+                          selectedPackIndex === packIndex
+                            ? 'bg-black text-white'
+                            : 'bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        {pack.size.replace(' шт', ' банок').replace('1 банок', '1 банка')}
+                      </button>
+                    ))}
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex items-baseline gap-2">
-                      {currentPack.oldPrice && (
-                        <span className="text-sm text-gray-400 line-through">
-                          {currentPack.oldPrice} ₽
-                        </span>
-                      )}
-                      <span className="text-lg font-bold text-foreground">
-                        {currentPack.price} ₽
-                      </span>
-                    </div>
-
-                    <div className="flex gap-2">
-                      {product.packSizes.map((pack, packIndex) => (
-                        <button
-                          key={packIndex}
-                          onClick={() => setSelectedPack(product.id, packIndex)}
-                          className={`px-3 py-1.5 text-xs font-medium rounded border transition-colors ${
-                            selectedPackIndex === packIndex
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
-                          }`}
-                        >
-                          {pack.size}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="flex gap-2 items-center pt-1">
+                    <Button className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-full font-bold">
+                      Купить
+                    </Button>
+                    <button className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center">
+                      <Icon name="ShoppingCart" size={18} />
+                    </button>
                   </div>
-
-                  <Button className="w-full" size="sm">
-                    Добавить в корзину
-                  </Button>
                 </div>
               </div>
             );
@@ -318,21 +316,39 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t mt-16">
-        <div className="container py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-heading font-bold text-lg">S</span>
-              </div>
-              <span className="font-heading font-bold">Snus Store</span>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-200/50 z-50">
+        <div className="flex justify-around items-center h-20 px-4">
+          <button className="flex flex-col items-center gap-1 py-2 px-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+              <Icon name="Home" size={24} className="text-white" />
             </div>
-            <p className="text-sm text-muted-foreground">
-              © 2026 Snus Store. Все права защищены.
-            </p>
-          </div>
+            <span className="text-xs font-medium text-black">Главная</span>
+          </button>
+
+          <button className="flex flex-col items-center gap-1 py-2 px-4">
+            <div className="w-12 h-12 flex items-center justify-center">
+              <Icon name="Heart" size={24} className="text-gray-400" />
+            </div>
+            <span className="text-xs text-gray-400">Избранное</span>
+          </button>
+
+          <button className="flex flex-col items-center gap-1 py-2 px-4">
+            <div className="w-12 h-12 flex items-center justify-center">
+              <Icon name="ShoppingCart" size={24} className="text-gray-400" />
+            </div>
+            <span className="text-xs text-gray-400">Корзина</span>
+          </button>
+
+          <button className="flex flex-col items-center gap-1 py-2 px-4">
+            <img 
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
+              alt="Profile" 
+              className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
+            />
+            <span className="text-xs text-gray-400">Профиль</span>
+          </button>
         </div>
-      </footer>
+      </nav>
     </div>
   );
 };
