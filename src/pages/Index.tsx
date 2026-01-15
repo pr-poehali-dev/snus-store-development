@@ -318,7 +318,7 @@ const Index = () => {
 
       <nav className="fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-2xl border-t border-gray-200/30 z-50 safe-area-bottom">
         <div className="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6">
-          <div className="flex items-center bg-white/50 rounded-full px-1.5 sm:px-2 py-1.5 sm:py-2">
+          <div className="flex items-center bg-white/50 px-1.5 sm:px-2 sm:py-2 rounded-full py-3">
             <button className="flex flex-col items-center gap-0.5 px-2 sm:px-3">
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
                 <Icon name="Home" size={20} className="text-white sm:w-[22px] sm:h-[22px]" />
