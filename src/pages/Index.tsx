@@ -11,9 +11,11 @@ interface Product {
   strength: string;
   flavor: string;
   price: number;
+  oldPrice?: number;
   image: string;
   category: string;
   nicotine: number;
+  packSizes: { size: string; price: number; oldPrice?: number }[];
 }
 
 const products: Product[] = [
@@ -24,9 +26,15 @@ const products: Product[] = [
     strength: 'Экстра крепкий',
     flavor: 'Мята',
     price: 590,
+    oldPrice: 690,
     image: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=400&h=400&fit=crop',
     category: 'strong',
-    nicotine: 43
+    nicotine: 43,
+    packSizes: [
+      { size: '1 шт', price: 590, oldPrice: 690 },
+      { size: '5 шт', price: 2800, oldPrice: 3450 },
+      { size: '10 шт', price: 5300, oldPrice: 6900 }
+    ]
   },
   {
     id: 2,
@@ -37,7 +45,12 @@ const products: Product[] = [
     price: 450,
     image: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop',
     category: 'medium',
-    nicotine: 10
+    nicotine: 10,
+    packSizes: [
+      { size: '1 шт', price: 450 },
+      { size: '5 шт', price: 2150 },
+      { size: '10 шт', price: 4000 }
+    ]
   },
   {
     id: 3,
@@ -48,7 +61,12 @@ const products: Product[] = [
     price: 520,
     image: 'https://images.unsplash.com/photo-1615485500834-bc10199bc4cf?w=400&h=400&fit=crop',
     category: 'strong',
-    nicotine: 16
+    nicotine: 16,
+    packSizes: [
+      { size: '1 шт', price: 520 },
+      { size: '5 шт', price: 2500 },
+      { size: '10 шт', price: 4700 }
+    ]
   },
   {
     id: 4,
@@ -59,7 +77,12 @@ const products: Product[] = [
     price: 420,
     image: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=400&h=400&fit=crop',
     category: 'light',
-    nicotine: 6
+    nicotine: 6,
+    packSizes: [
+      { size: '1 шт', price: 420 },
+      { size: '5 шт', price: 2000 },
+      { size: '10 шт', price: 3800 }
+    ]
   },
   {
     id: 5,
@@ -70,7 +93,12 @@ const products: Product[] = [
     price: 480,
     image: 'https://images.unsplash.com/photo-1583912267550-a43e31868b6b?w=400&h=400&fit=crop',
     category: 'medium',
-    nicotine: 12
+    nicotine: 12,
+    packSizes: [
+      { size: '1 шт', price: 480 },
+      { size: '5 шт', price: 2300 },
+      { size: '10 шт', price: 4300 }
+    ]
   },
   {
     id: 6,
@@ -81,7 +109,12 @@ const products: Product[] = [
     price: 440,
     image: 'https://images.unsplash.com/photo-1601924381319-5e1c20c2e9d6?w=400&h=400&fit=crop',
     category: 'light',
-    nicotine: 9
+    nicotine: 9,
+    packSizes: [
+      { size: '1 шт', price: 440 },
+      { size: '5 шт', price: 2100 },
+      { size: '10 шт', price: 3900 }
+    ]
   },
   {
     id: 7,
@@ -90,9 +123,15 @@ const products: Product[] = [
     strength: 'Крепкий',
     flavor: 'Мята',
     price: 510,
+    oldPrice: 580,
     image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=400&fit=crop',
     category: 'strong',
-    nicotine: 22
+    nicotine: 22,
+    packSizes: [
+      { size: '1 шт', price: 510, oldPrice: 580 },
+      { size: '5 шт', price: 2450, oldPrice: 2900 },
+      { size: '10 шт', price: 4600, oldPrice: 5800 }
+    ]
   },
   {
     id: 8,
@@ -103,13 +142,19 @@ const products: Product[] = [
     price: 460,
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
     category: 'medium',
-    nicotine: 11
+    nicotine: 11,
+    packSizes: [
+      { size: '1 шт', price: 460 },
+      { size: '5 шт', price: 2200 },
+      { size: '10 шт', price: 4100 }
+    ]
   }
 ];
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedPacks, setSelectedPacks] = useState<Record<number, number>>({});
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -118,6 +163,14 @@ const Index = () => {
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const getSelectedPack = (productId: number) => {
+    return selectedPacks[productId] ?? 0;
+  };
+
+  const setSelectedPack = (productId: number, packIndex: number) => {
+    setSelectedPacks(prev => ({ ...prev, [productId]: packIndex }));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -190,54 +243,70 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in cursor-pointer"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <div className="aspect-square overflow-hidden bg-secondary/50">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+          {filteredProducts.map((product, index) => {
+            const selectedPackIndex = getSelectedPack(product.id);
+            const currentPack = product.packSizes[selectedPackIndex];
+            
+            return (
+              <div
+                key={product.id}
+                className="group bg-white border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="relative aspect-square overflow-hidden bg-white p-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
 
-              <div className="p-4 space-y-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <p className="text-xs text-muted-foreground font-medium">{product.brand}</p>
-                    <h3 className="font-heading font-semibold text-lg leading-tight mt-1">
+                <div className="p-4 space-y-3 border-t border-gray-100">
+                  <div>
+                    <a href="#" className="text-xs text-gray-500 hover:text-primary transition-colors">
+                      {product.brand}
+                    </a>
+                    <h3 className="font-medium text-base leading-snug mt-1 hover:text-primary transition-colors cursor-pointer">
                       {product.name}
                     </h3>
                   </div>
-                  <Badge variant="secondary" className="text-xs">
-                    {product.nicotine} мг
-                  </Badge>
-                </div>
 
-                <div className="flex flex-wrap gap-1.5">
-                  <Badge variant="outline" className="text-xs">
-                    {product.strength}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {product.flavor}
-                  </Badge>
-                </div>
+                  <div className="space-y-2">
+                    <div className="flex items-baseline gap-2">
+                      {currentPack.oldPrice && (
+                        <span className="text-sm text-gray-400 line-through">
+                          {currentPack.oldPrice} ₽
+                        </span>
+                      )}
+                      <span className="text-lg font-bold text-foreground">
+                        {currentPack.price} ₽
+                      </span>
+                    </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <span className="font-heading font-bold text-2xl">
-                    {product.price} ₽
-                  </span>
-                  <Button size="sm" className="gap-2">
-                    <Icon name="Plus" size={16} />
-                    В корзину
+                    <div className="flex gap-2">
+                      {product.packSizes.map((pack, packIndex) => (
+                        <button
+                          key={packIndex}
+                          onClick={() => setSelectedPack(product.id, packIndex)}
+                          className={`px-3 py-1.5 text-xs font-medium rounded border transition-colors ${
+                            selectedPackIndex === packIndex
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                          }`}
+                        >
+                          {pack.size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button className="w-full" size="sm">
+                    Добавить в корзину
                   </Button>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {filteredProducts.length === 0 && (
