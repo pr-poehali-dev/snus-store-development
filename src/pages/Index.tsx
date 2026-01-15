@@ -257,11 +257,18 @@ const Index = () => {
                 className="bg-white rounded-2xl overflow-hidden shadow-sm animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="relative aspect-square bg-gray-50 p-6 flex items-center justify-center">
+                <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-200 p-4 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                    <img
+                      src="https://cdn.poehali.dev/files/IMG_8264-Photoroom.png"
+                      alt="background"
+                      className="w-40 h-40 object-contain"
+                    />
+                  </div>
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain rounded-full"
+                    className="relative z-10 w-32 h-32 object-contain drop-shadow-lg"
                   />
                 </div>
 
@@ -316,36 +323,38 @@ const Index = () => {
         )}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-200/50 z-50">
-        <div className="flex justify-around items-center h-20 px-4">
-          <button className="flex flex-col items-center gap-1 py-2 px-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
-              <Icon name="Home" size={24} className="text-white" />
-            </div>
-            <span className="text-xs font-medium text-black">Главная</span>
-          </button>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-2xl border-t border-gray-200/30 z-50">
+        <div className="flex items-center justify-between h-20 px-6">
+          <div className="flex items-center gap-1 bg-white/50 rounded-full px-3 py-2">
+            <button className="flex flex-col items-center gap-0.5 px-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+                <Icon name="Home" size={22} className="text-white" />
+              </div>
+              <span className="text-[10px] font-medium text-black mt-0.5">Главная</span>
+            </button>
 
-          <button className="flex flex-col items-center gap-1 py-2 px-4">
-            <div className="w-12 h-12 flex items-center justify-center">
-              <Icon name="Heart" size={24} className="text-gray-400" />
-            </div>
-            <span className="text-xs text-gray-400">Избранное</span>
-          </button>
+            <button className="flex flex-col items-center gap-0.5 px-3">
+              <div className="w-10 h-10 flex items-center justify-center">
+                <Icon name="Heart" size={22} className="text-gray-400" />
+              </div>
+              <span className="text-[10px] text-gray-400 mt-0.5">Избранное</span>
+            </button>
 
-          <button className="flex flex-col items-center gap-1 py-2 px-4">
-            <div className="w-12 h-12 flex items-center justify-center">
-              <Icon name="ShoppingCart" size={24} className="text-gray-400" />
-            </div>
-            <span className="text-xs text-gray-400">Корзина</span>
-          </button>
+            <button className="flex flex-col items-center gap-0.5 px-3">
+              <div className="w-10 h-10 flex items-center justify-center">
+                <Icon name="ShoppingCart" size={22} className="text-gray-400" />
+              </div>
+              <span className="text-[10px] text-gray-400 mt-0.5">Корзина</span>
+            </button>
+          </div>
 
-          <button className="flex flex-col items-center gap-1 py-2 px-4">
+          <button className="flex flex-col items-center gap-0.5 bg-white/50 rounded-full px-4 py-2">
             <img 
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
               alt="Profile" 
-              className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
+              className="w-10 h-10 rounded-full object-cover"
             />
-            <span className="text-xs text-gray-400">Профиль</span>
+            <span className="text-[10px] text-gray-400 mt-0.5">Профиль</span>
           </button>
         </div>
       </nav>
