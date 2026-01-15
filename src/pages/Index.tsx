@@ -318,12 +318,12 @@ const Index = () => {
 
       <nav className="fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-2xl border-t border-gray-200/30 z-50 safe-area-bottom">
         <div className="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6">
-          <div className="flex items-center bg-white/50 sm:px-2 sm:py-2 rounded-full px-[300px] mx-[15px] py-2.5 my-0">
-            <button className="flex flex-col items-center gap-0.5 sm:px-3 px-0 rounded-none font-normal mx-[100px]">
+          <div className="flex items-center bg-white/50 sm:px-2 sm:py-2 rounded-full px-[300px] mx-[15px] my-0 py-2">
+            <button className="flex flex-col items-center gap-0.5 sm:px-3 px-0 rounded-none font-normal mx-[75px]">
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
                 <Icon name="Home" size={20} className="text-white sm:w-[22px] sm:h-[22px]" />
               </div>
-              <span className="text-[9px] sm:text-[10px] font-medium text-black mt-0.5">Главная</span>
+              <span className="text-[9px] sm:text-[10px] font-medium text-black mt-0.5 mx-0">Главная</span>
             </button>
 
             <button className="flex flex-col items-center gap-0.5 px-2 sm:px-3 mx-[100px]">
@@ -333,7 +333,7 @@ const Index = () => {
               <span className="text-[9px] sm:text-[10px] text-gray-400 mt-0.5">Избранное</span>
             </button>
 
-            <button className="flex flex-col items-center gap-0.5 px-2 sm:px-3">
+            <button className="flex flex-col items-center gap-0.5 px-2 sm:px-3 mx-[75px]">
               <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
                 <Icon name="ShoppingCart" size={20} className="text-gray-400 sm:w-[22px] sm:h-[22px]" />
               </div>
@@ -341,7 +341,7 @@ const Index = () => {
             </button>
           </div>
 
-          <button className="flex flex-col items-center gap-0.5 bg-white/50 rounded-full px-3 sm:px-4 py-1.5 sm:py-2">
+          <button className="flex flex-col items-center gap-0.5 bg-white/50 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mx-[100px]">
             <img 
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
               alt="Profile" 
